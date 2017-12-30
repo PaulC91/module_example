@@ -1,3 +1,5 @@
+# app to dynamically generate charts and tables in an shiny dashboard
+
 library(shiny)
 library(shinydashboard)
 library(tidyverse)
