@@ -22,7 +22,7 @@ ui <- dashboardPage(
                             title = "Culture of Insight",
                             style = "cursor: pointer;"),
                           class = "dropdown"),
-                  tags$li(a(href = "http://github.com/paulc91/",
+                  tags$li(a(href = "http://github.com/paulc91/module_example",
                             icon("github"),
                             title = "Code on Github",
                             style = "cursor: pointer;"),
