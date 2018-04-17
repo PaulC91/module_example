@@ -30,10 +30,16 @@ ui <- dashboardPage(
                   ),
   dashboardSidebar(disable = TRUE),
   dashboardBody(
+    tags$head(
+      tags$script(src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.contentWindow.min.js",
+                  type="text/javascript")
+      ),
+    
     h1("Demographics Charts & Tables Rendered by Module Functions", style = "text-align: center; padding-bottom: 30px;"),
     fluidRow(
       map(unique(demographics$category), ~ chartTableBoxUI(id = .x))
-    )
+    ),
+    fluidRow(HTML('<div data-iframe-height></div>'))
   )
 )
 

@@ -18,23 +18,20 @@ chartTableBoxUI <- function(id, div_width = "col-xs-12 col-sm-6 col-md-4") {
 
 chartTableBox <- function(input, output, session, data, dem_group) {
   
-  mod_data <- reactive({
-    data %>% filter(category == dem_group)
-  })
+  mod_data <- data %>% filter(category == dem_group)
   
   output$chart <- renderHighchart({
     
-    hchart(mod_data(), "column", hcaes(x = demographic, y = percent)) %>%
+    hchart(mod_data, "column", hcaes(x = demographic, y = percent)) %>%
       hc_xAxis(title = list(text = "")) %>% 
       hc_yAxis(title = list(text = ""), labels = list(format = "{value}%")) %>%  
-      hc_tooltip(valueDecimals = 1, valueSuffix = " %") #%>%
-      #hc_add_theme(hc_theme_smpl())
+      hc_tooltip(valueDecimals = 1, valueSuffix = " %")
     
   })
   
   output$table <- renderDataTable({
     
-    dat <- mod_data() %>% select(demographic, percent) %>% mutate(percent = (percent / 100))
+    dat <- mod_data %>% select(demographic, percent) %>% mutate(percent = (percent / 100))
     
     DT::datatable(dat, style = "bootstrap", class = "display", options=list(scrollX=TRUE, dom = 't')) %>% 
       formatPercentage('percent', 0)
